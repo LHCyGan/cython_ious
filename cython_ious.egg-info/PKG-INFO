@@ -1,0 +1,29 @@
+Metadata-Version: 2.1
+Name: cython-ious
+Version: 0.0.1
+Summary: Standalone cython_ious
+Home-page: https://github.com/LHCyGan/cython_ious.git
+Author: LHCyGan
+Author-email: autoencoder2000@163.com
+License: UNKNOWN
+Description: # cython_ious
+        Cython's standalone iou
+        
+        ## install
+        ```
+        pip install cython_ious
+        ```
+        
+        ## use
+        ```
+        from cython_ious import bbox_giou as giou
+        
+        overlaps = giou(
+                np.ascontiguousarray(dt, dtype=np.float32),
+                np.ascontiguousarray(gt, dtype=np.float32)
+            )
+        ```
+        
+Keywords: cython_ious
+Platform: UNKNOWN
+Description-Content-Type: text/markdown

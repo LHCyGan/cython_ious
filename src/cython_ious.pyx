@@ -61,7 +61,7 @@ def bbox_giou(
     """
     cdef unsigned int N = boxes1.shape[0]
     cdef unsigned int K = boxes2.shape[0]
-    cdef np.ndarray[DTYPE_t, ndim=2] overlaps = np.zeros((N, K), dtype=DTYPE_t)
+    cdef np.ndarray[DTYPE_t, ndim=2] overlaps = np.zeros((N, K), dtype=DTYPE)
     cdef DTYPE_t iw, ih, box_area, area
     cdef DTYPE_t ua
     cdef unsigned int k, n
@@ -115,7 +115,7 @@ def bbox_diou(
     """
     cdef unsigned int N = boxes1.shape[0]
     cdef unsigned int K = boxes2.shape[0]
-    cdef np.ndarray[DTYPE_t, ndim=2] overlaps = np.zeros((N, K), dtype=DTYPE_t)
+    cdef np.ndarray[DTYPE_t, ndim=2] overlaps = np.zeros((N, K), dtype=DTYPE)
     cdef DTYPE_t iw, ih, box_area, area
     cdef DTYPE_t ua, area_1, area_2
     cdef unsigned int k, n

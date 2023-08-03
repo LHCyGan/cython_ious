@@ -41,7 +41,7 @@ setup(
     install_requires=["Cython", "numpy"],
     ext_modules=ext_modules,
     cmdclass={'build': build},
-    version='0.1.3',
+    version='0.0.1',
     description='Standalone cython_ious',
     long_description=long_description,
     long_description_content_type="text/markdown",
