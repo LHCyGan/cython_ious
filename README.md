@@ -15,3 +15,12 @@ overlaps = giou(
         np.ascontiguousarray(gt, dtype=np.float32)
     )
 ```
+
+## TODO
+- [x] iou
+- [x] giou
+- [x] diou
+- [ ] ciou
+- [ ] eiou
+- [ ] cbiou
+- [ ] mpdiou    
