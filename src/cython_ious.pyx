@@ -83,17 +83,18 @@ def bbox_giou(
                         max(boxes1[n, 1], boxes2[k, 1]) + 1
                 )
 
-                lt = np.minimum(boxes1[n, :2], boxes2[k, :2])
-                rb = np.maximum(boxes1[n, 2:], boxes2[k, 2:])
-                wh = np.maximum(rb - lt, np.zeros_like(rb - lt))
-                area = wh[0] * wh[1]
-
                 if ih > 0:
                     ua = float(
                             (boxes1[n, 2] - boxes1[n, 0] + 1) *
                             (boxes1[n, 3] - boxes1[n, 1] + 1) +
                             box_area - iw * ih
                     )
+
+                    lt = np.minimum(boxes1[n, :2], boxes2[k, :2])
+                    rb = np.maximum(boxes1[n, 2:], boxes2[k, 2:])
+                    wh = np.maximum(rb - lt, np.zeros_like(rb - lt))
+                    area = wh[0] * wh[1]
+
                     overlaps[n, k] = iw * ih / ua
                     overlaps[n, k] = (overlaps[n, k] - (area - ua) / area)
 
@@ -135,22 +136,6 @@ def bbox_diou(
                         min(boxes1[n, 3], boxes2[k, 3]) -
                         max(boxes1[n, 1], boxes2[k, 1]) + 1
                 )
-                area_1 = (boxes1[n, 2] - boxes1[n, 0]) * (boxes1[n, 3] - boxes1[n, 1])
-                area_2 = (boxes2[k, 2] - boxes2[k, 0]) * (boxes2[k, 3] - boxes2[k, 1])
-
-                # calculate center point of each box
-                center_x1 = (boxes1[n, 2] - boxes1[n, 0]) / 2
-                center_y1 = (boxes1[n, 3] - boxes1[n, 1]) / 2
-                center_x2 = (boxes2[k, 2] - boxes2[k, 0]) / 2
-                center_y2 = (boxes2[k, 3] - boxes2[k, 1]) / 2
-
-                # calculate square of center point distance
-                p2 = (center_x2 - center_x1) ** 2 + (center_y2 - center_y1) ** 2
-
-                # calculate square of the diagonal length
-                width_c = max(boxes1[2], boxes2[2]) - min(boxes1[0], boxes2[0])
-                height_c = max(boxes1[3], boxes2[3]) - min(boxes1[1], boxes2[1])
-                c2 = width_c ** 2 + height_c ** 2
 
                 if ih > 0:
                     ua = float(
@@ -158,6 +143,23 @@ def bbox_diou(
                             (boxes1[n, 3] - boxes1[n, 1] + 1) +
                             box_area - iw * ih
                     )
+
+                    area_1 = (boxes1[n, 2] - boxes1[n, 0]) * (boxes1[n, 3] - boxes1[n, 1])
+                    area_2 = (boxes2[k, 2] - boxes2[k, 0]) * (boxes2[k, 3] - boxes2[k, 1])
+
+                    # calculate center point of each box
+                    center_x1 = (boxes1[n, 2] - boxes1[n, 0]) / 2
+                    center_y1 = (boxes1[n, 3] - boxes1[n, 1]) / 2
+                    center_x2 = (boxes2[k, 2] - boxes2[k, 0]) / 2
+                    center_y2 = (boxes2[k, 3] - boxes2[k, 1]) / 2
+
+                    # calculate square of center point distance
+                    p2 = (center_x2 - center_x1) ** 2 + (center_y2 - center_y1) ** 2
+
+                    # calculate square of the diagonal length
+                    width_c = max(boxes1[n, 2], boxes2[k, 2]) - min(boxes1[n, 0], boxes2[k, 0])
+                    height_c = max(boxes1[n, 3], boxes2[k, 3]) - min(boxes1[n, 1], boxes2[k, 1])
+                    c2 = width_c ** 2 + height_c ** 2
 
 
                     overlaps[n, k] = iw * ih / ua
