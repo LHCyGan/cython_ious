@@ -47,6 +47,6 @@ setup(
     long_description_content_type="text/markdown",
     author='LHCyGan',
     author_email='autoencoder2000@163.com',
-    url='https://github.com/samson-wang/cython_ious.git',
+    url='https://github.com/LHCyGan/cython_ious.git',
     keywords=['cython_ious']
 )
